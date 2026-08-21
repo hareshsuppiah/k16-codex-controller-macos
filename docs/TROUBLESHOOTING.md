@@ -54,3 +54,11 @@ tail -f /tmp/k16-codex-lights.stderr.log
 ## The colour does not match the current Codex state
 
 The helper currently parses Codex's internal session JSONL. That format is not a supported public API and may change. Run the parser fixture test with `./scripts/test.sh`, then open an issue with the Codex app version and redacted event shapes. Do not attach private session files.
+
+The monitor follows up to 64 recently modified sessions from the preceding seven days. A pending `request_user_input` event has priority over tasks that are still thinking. Check the derived aggregate without changing the lights:
+
+```sh
+"$HOME/Applications/K16 Codex Lights.app/Contents/MacOS/K16CodexLights" --status-once
+```
+
+If the sidebar says **Needs input** but this command does not print `needs_input`, the Codex event shape may have changed. Capture only the event type, tool name, and Codex version when reporting it; never publish session content.

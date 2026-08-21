@@ -75,6 +75,14 @@ To test one colour directly:
 
 Accepted names are `idle`, `thinking`, `complete`, `needs_input`, and `error`.
 
+To inspect the status derived from all recent local Codex tasks without changing the lights:
+
+```sh
+"$HOME/Applications/K16 Codex Lights.app/Contents/MacOS/K16CodexLights" --status-once
+```
+
+If any tracked task is waiting for a `request_user_input` response, this prints `needs_input` even when another task is actively thinking.
+
 ## 8. Optional vendor configurator workaround
 
 The vendor site did not contain a layout entry for `36ae_2475`, so it initially displayed a full QWERTY keyboard or omitted the Lighting page. The related `0816_2475` definition matches this 16-key/three-knob layout.

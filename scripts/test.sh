@@ -17,4 +17,15 @@ node --check "$repo_root/tools/vendor-layout-proxy.mjs" 2>/dev/null || {
   --replay "$repo_root/tests/status-fixture.jsonl" > "$actual"
 diff -u "$repo_root/tests/status-expected.txt" "$actual"
 
+aggregate_status=$(
+  "$repo_root/build/K16 Codex Lights.app/Contents/MacOS/K16CodexLights" \
+    --aggregate-replay \
+    "$repo_root/tests/aggregate-thinking.jsonl" \
+    "$repo_root/tests/aggregate-waiting.jsonl"
+)
+if [ "$aggregate_status" != "needs_input" ]; then
+  echo "Expected cross-task aggregate status needs_input; received $aggregate_status" >&2
+  exit 1
+fi
+
 echo "All tests passed."

@@ -3,6 +3,8 @@ set -eu
 
 label="io.github.hareshsuppiah.k16codexlights"
 domain="gui/$(id -u)"
+program="$HOME/Applications/K16 Codex Lights.app/Contents/MacOS/K16CodexLights"
+launch_agent="$HOME/Library/LaunchAgents/$label.plist"
 failures=0
 
 check() {
@@ -19,12 +21,27 @@ check() {
 check "macOS" test "$(uname -s)" = "Darwin"
 check "clang" command -v clang
 check "Karabiner-Elements" test -d "/Applications/Karabiner-Elements.app"
-check "installed lighting app" test -x "$HOME/Applications/K16 Codex Lights.app/Contents/MacOS/K16CodexLights"
+check "installed lighting app" test -x "$program"
 check "installed Karabiner rules" test -f "$HOME/.config/karabiner/assets/complex_modifications/k16-codex-controller.json"
+check "installed LaunchAgent" test -f "$launch_agent"
 check "login service" launchctl print "$domain/$label"
 
-usb_report=$(system_profiler SPUSBDataType 2>/dev/null || true)
-if printf '%s\n' "$usb_report" | grep -qi '0x36ae' && printf '%s\n' "$usb_report" | grep -qi '0x2475'; then
+if [ -x "$program" ]; then
+  derived_status=$("$program" --status-once 2>/dev/null || true)
+  case "$derived_status" in
+    idle|thinking|complete|needs_input|error)
+      printf 'OK   aggregate Codex status (%s)\n' "$derived_status"
+      ;;
+    *)
+      echo "MISS aggregate Codex status"
+      failures=$((failures + 1))
+      ;;
+  esac
+fi
+
+hid_report=$(ioreg -r -c IOHIDDevice -l 2>/dev/null || true)
+if printf '%s\n' "$hid_report" | grep -q '"VendorID" = 13998' && \
+   printf '%s\n' "$hid_report" | grep -q '"ProductID" = 9333'; then
   echo "OK   tested K16 USB identity (36ae:2475)"
 else
   echo "MISS tested K16 USB identity (36ae:2475)"

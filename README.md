@@ -93,7 +93,9 @@ Use Karabiner-EventViewer to confirm your unit's events before changing the supp
 
 ## How the lighting works
 
-`K16CodexLights` watches the newest local Codex session file under `~/.codex/sessions`, derives a small state, and sends a monochrome HSV colour to the keypad's vendor HID interface. It does not upload session content or call a network service.
+`K16CodexLights` watches the most recently active local Codex sessions under `~/.codex/sessions`, derives a small state for each task, and sends a monochrome HSV colour to the keypad's vendor HID interface. It does not upload session content or call a network service.
+
+Status priority is **needs input → error → thinking → complete → idle**. This means a task waiting for your response turns the pad yellow even while another task is still working. The monitor recognises both current `function_call` and older `custom_tool_call` representations of Codex's `request_user_input` event.
 
 Codex's session-file format is not a public API. A future Codex update may require the parser to be updated.
 
