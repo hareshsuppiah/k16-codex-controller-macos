@@ -1,0 +1,7 @@
+{"type":"task_started"}
+{"type":"custom_tool_call","name":"request_user_input"}
+{"type":"task_started"}
+{"type":"task_complete","message":"Finished successfully"}
+{"type":"task_started"}
+{"type":"task_complete","message":"Please confirm the next step"}
+{"type":"turn_aborted"}

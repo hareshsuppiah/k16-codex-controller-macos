@@ -1,0 +1,224 @@
+{
+  "title": "K16 Codex Controller",
+  "rules": [
+    {
+      "description": "K16: Fn, Return, Escape, screenshot, Select All, Copy, and Paste",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "f17", "modifiers": { "optional": ["any"] } },
+          "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_0", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "return_or_enter" }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_period", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "escape" }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_enter", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "2", "modifiers": ["left_command", "left_shift"] }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_7", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "c", "modifiers": ["left_command"] }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_8", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "v", "modifiers": ["left_command"] }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "keypad_hyphen", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "a", "modifiers": ["left_command"] }],
+          "conditions": [{
+            "type": "device_if",
+            "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+          }]
+        }
+      ]
+    },
+    {
+      "description": "K16 top knob: Codex reasoning effort",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "consumer_key_code": "volume_increment",
+            "modifiers": { "optional": ["any"] }
+          },
+          "to": [{
+            "key_code": "equal_sign",
+            "modifiers": ["left_command", "left_control", "left_option"]
+          }],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_unless",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "consumer_key_code": "volume_decrement",
+            "modifiers": { "optional": ["any"] }
+          },
+          "to": [{
+            "key_code": "hyphen",
+            "modifiers": ["left_command", "left_control", "left_option"]
+          }],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_unless",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "K16 middle knob: Codex model picker",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "f13", "modifiers": { "optional": ["any"] } },
+          "to": [
+            { "key_code": "m", "modifiers": ["left_control", "left_shift"] },
+            { "set_variable": { "name": "k16_model_picker_open", "value": 1 } }
+          ],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_unless",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "key_code": "f13", "modifiers": { "optional": ["any"] } },
+          "to": [{ "key_code": "down_arrow" }],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_if",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": {
+            "consumer_key_code": "volume_decrement",
+            "modifiers": { "optional": ["any"] }
+          },
+          "to": [{ "key_code": "up_arrow" }],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_if",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "from": { "consumer_key_code": "mute", "modifiers": { "optional": ["any"] } },
+          "to": [
+            { "key_code": "return_or_enter" },
+            { "set_variable": { "name": "k16_model_picker_open", "value": 0 } }
+          ],
+          "conditions": [
+            {
+              "type": "device_if",
+              "identifiers": [{ "vendor_id": 13998, "product_id": 9333 }]
+            },
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": ["^com\\.openai\\.codex$"]
+            },
+            {
+              "type": "variable_if",
+              "name": "k16_model_picker_open",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
