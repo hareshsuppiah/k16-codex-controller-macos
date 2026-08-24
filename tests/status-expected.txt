@@ -1,0 +1,7 @@
+thinking
+needs_input
+thinking
+complete
+thinking
+needs_input
+error

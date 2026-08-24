@@ -1,0 +1,7 @@
+{"type":"task_started"}
+{"type":"function_call","name":"request_user_input","call_id":"input-1"}
+{"type":"function_call_output","call_id":"input-1"}
+{"type":"task_complete","message":"Finished successfully"}
+{"type":"task_started"}
+{"type":"task_complete","message":"Please confirm the next step"}
+{"type":"turn_aborted"}
