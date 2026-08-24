@@ -124,7 +124,7 @@ static const char *status_name(CodexStatus status) {
 static RGB status_color(CodexStatus status) {
     switch (status) {
         case STATUS_IDLE: return (RGB){0xe8, 0xee, 0xf7};
-        case STATUS_THINKING: return (RGB){0x4a, 0x90, 0xff};
+        case STATUS_THINKING: return (RGB){0x00, 0x57, 0xb8};
         case STATUS_COMPLETE: return (RGB){0x54, 0xd6, 0x8c};
         case STATUS_NEEDS_INPUT: return (RGB){0xff, 0xd3, 0x4e};
         case STATUS_ERROR: return (RGB){0xff, 0x5c, 0x8a};

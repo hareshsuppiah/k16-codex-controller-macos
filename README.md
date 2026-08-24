@@ -11,11 +11,11 @@ The project maps useful editing actions, uses two rotary knobs for Codex model a
 
 | Colour | Meaning |
 |---|---|
-| White | Codex is idle |
-| Blue | Codex is working |
-| Green | The task completed successfully |
-| Yellow | Codex needs input or approval |
-| Pink | An error occurred or the task was aborted |
+| White (`#E8EEF7`) | Codex is idle |
+| Deep blue (`#0057B8`) | Codex is working |
+| Green (`#54D68C`) | The task completed successfully |
+| Yellow (`#FFD34E`) | Codex needs input or approval |
+| Pink (`#FF5C8A`) | An error occurred or the task was aborted |
 
 The tested layout also provides:
 
