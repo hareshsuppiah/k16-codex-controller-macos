@@ -62,3 +62,5 @@ The monitor follows up to 64 recently modified sessions from the preceding seven
 ```
 
 If the sidebar says **Needs input** but this command does not print `needs_input`, the Codex event shape may have changed. Capture only the event type, tool name, and Codex version when reporting it; never publish session content.
+
+If colours appear to overwrite one another, run `./scripts/doctor.sh`. Exactly one `K16CodexLights` process should be running. The installer stops manually launched copies and disables the obsolete `au.com.hareshsuppiah.k16codexlights` login service used by early development builds.
